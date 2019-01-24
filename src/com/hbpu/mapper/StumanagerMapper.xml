@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.StumanagerMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Stumanager" >
+    <id column="mgid" property="mgid" jdbcType="INTEGER" />
+    <result column="mgstuid" property="mgstuid" jdbcType="VARCHAR" />
+    <result column="mgname" property="mgname" jdbcType="VARCHAR" />
+    <result column="mgpassword" property="mgpassword" jdbcType="VARCHAR" />
+    <result column="mgbuildnum" property="mgbuildnum" jdbcType="VARCHAR" />
+    <result column="mgmyname" property="mgmyname" jdbcType="VARCHAR" />
+    <result column="mgsex" property="mgsex" jdbcType="VARCHAR" />
+    <result column="mgtel" property="mgtel" jdbcType="VARCHAR" />
+    <result column="mgpower" property="mgpower" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mgid, mgstuid, mgname, mgpassword, mgbuildnum, mgmyname, mgsex, mgtel, mgpower
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.StumanagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stumanager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stumanager
+    where mgid = #{mgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stumanager
+    where mgid = #{mgid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.StumanagerExample" >
+    delete from stumanager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Stumanager" >
+    insert into stumanager (mgid, mgstuid, mgname, 
+      mgpassword, mgbuildnum, mgmyname, 
+      mgsex, mgtel, mgpower
+      )
+    values (#{mgid,jdbcType=INTEGER}, #{mgstuid,jdbcType=VARCHAR}, #{mgname,jdbcType=VARCHAR}, 
+      #{mgpassword,jdbcType=VARCHAR}, #{mgbuildnum,jdbcType=VARCHAR}, #{mgmyname,jdbcType=VARCHAR}, 
+      #{mgsex,jdbcType=VARCHAR}, #{mgtel,jdbcType=VARCHAR}, #{mgpower,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Stumanager" >
+    insert into stumanager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mgid != null" >
+        mgid,
+      </if>
+      <if test="mgstuid != null" >
+        mgstuid,
+      </if>
+      <if test="mgname != null" >
+        mgname,
+      </if>
+      <if test="mgpassword != null" >
+        mgpassword,
+      </if>
+      <if test="mgbuildnum != null" >
+        mgbuildnum,
+      </if>
+      <if test="mgmyname != null" >
+        mgmyname,
+      </if>
+      <if test="mgsex != null" >
+        mgsex,
+      </if>
+      <if test="mgtel != null" >
+        mgtel,
+      </if>
+      <if test="mgpower != null" >
+        mgpower,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mgid != null" >
+        #{mgid,jdbcType=INTEGER},
+      </if>
+      <if test="mgstuid != null" >
+        #{mgstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mgname != null" >
+        #{mgname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgpassword != null" >
+        #{mgpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mgbuildnum != null" >
+        #{mgbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmyname != null" >
+        #{mgmyname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgsex != null" >
+        #{mgsex,jdbcType=VARCHAR},
+      </if>
+      <if test="mgtel != null" >
+        #{mgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="mgpower != null" >
+        #{mgpower,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.StumanagerExample" resultType="java.lang.Integer" >
+    select count(*) from stumanager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stumanager
+    <set >
+      <if test="record.mgid != null" >
+        mgid = #{record.mgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mgstuid != null" >
+        mgstuid = #{record.mgstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgname != null" >
+        mgname = #{record.mgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgpassword != null" >
+        mgpassword = #{record.mgpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgbuildnum != null" >
+        mgbuildnum = #{record.mgbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgmyname != null" >
+        mgmyname = #{record.mgmyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgsex != null" >
+        mgsex = #{record.mgsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgtel != null" >
+        mgtel = #{record.mgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgpower != null" >
+        mgpower = #{record.mgpower,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stumanager
+    set mgid = #{record.mgid,jdbcType=INTEGER},
+      mgstuid = #{record.mgstuid,jdbcType=VARCHAR},
+      mgname = #{record.mgname,jdbcType=VARCHAR},
+      mgpassword = #{record.mgpassword,jdbcType=VARCHAR},
+      mgbuildnum = #{record.mgbuildnum,jdbcType=VARCHAR},
+      mgmyname = #{record.mgmyname,jdbcType=VARCHAR},
+      mgsex = #{record.mgsex,jdbcType=VARCHAR},
+      mgtel = #{record.mgtel,jdbcType=VARCHAR},
+      mgpower = #{record.mgpower,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Stumanager" >
+    update stumanager
+    <set >
+      <if test="mgstuid != null" >
+        mgstuid = #{mgstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mgname != null" >
+        mgname = #{mgname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgpassword != null" >
+        mgpassword = #{mgpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mgbuildnum != null" >
+        mgbuildnum = #{mgbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmyname != null" >
+        mgmyname = #{mgmyname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgsex != null" >
+        mgsex = #{mgsex,jdbcType=VARCHAR},
+      </if>
+      <if test="mgtel != null" >
+        mgtel = #{mgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="mgpower != null" >
+        mgpower = #{mgpower,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mgid = #{mgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Stumanager" >
+    update stumanager
+    set mgstuid = #{mgstuid,jdbcType=VARCHAR},
+      mgname = #{mgname,jdbcType=VARCHAR},
+      mgpassword = #{mgpassword,jdbcType=VARCHAR},
+      mgbuildnum = #{mgbuildnum,jdbcType=VARCHAR},
+      mgmyname = #{mgmyname,jdbcType=VARCHAR},
+      mgsex = #{mgsex,jdbcType=VARCHAR},
+      mgtel = #{mgtel,jdbcType=VARCHAR},
+      mgpower = #{mgpower,jdbcType=VARCHAR}
+    where mgid = #{mgid,jdbcType=INTEGER}
+  </update>
+</mapper>

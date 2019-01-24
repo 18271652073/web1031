@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.StumyMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Stumy" >
+    <id column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="mstuid" property="mstuid" jdbcType="VARCHAR" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="mpassword" property="mpassword" jdbcType="VARCHAR" />
+    <result column="msex" property="msex" jdbcType="VARCHAR" />
+    <result column="mage" property="mage" jdbcType="DATE" />
+    <result column="mbuildnum" property="mbuildnum" jdbcType="VARCHAR" />
+    <result column="mdrom" property="mdrom" jdbcType="VARCHAR" />
+    <result column="mcollege" property="mcollege" jdbcType="VARCHAR" />
+    <result column="mmajor" property="mmajor" jdbcType="VARCHAR" />
+    <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+    <result column="mparenttel" property="mparenttel" jdbcType="VARCHAR" />
+    <result column="mpicture" property="mpicture" jdbcType="VARCHAR" />
+    <result column="maddress" property="maddress" jdbcType="VARCHAR" />
+    <result column="mdate" property="mdate" jdbcType="DATE" />
+    <result column="mstate" property="mstate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mid, mstuid, mname, mpassword, msex, mage, mbuildnum, mdrom, mcollege, mmajor, mtel, 
+    mparenttel, mpicture, maddress, mdate, mstate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.StumyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stumy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stumy
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stumy
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.StumyExample" >
+    delete from stumy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Stumy" >
+    insert into stumy (mid, mstuid, mname, 
+      mpassword, msex, mage, 
+      mbuildnum, mdrom, mcollege, 
+      mmajor, mtel, mparenttel, 
+      mpicture, maddress, mdate, 
+      mstate)
+    values (#{mid,jdbcType=INTEGER}, #{mstuid,jdbcType=VARCHAR}, #{mname,jdbcType=VARCHAR}, 
+      #{mpassword,jdbcType=VARCHAR}, #{msex,jdbcType=VARCHAR}, #{mage,jdbcType=DATE}, 
+      #{mbuildnum,jdbcType=VARCHAR}, #{mdrom,jdbcType=VARCHAR}, #{mcollege,jdbcType=VARCHAR}, 
+      #{mmajor,jdbcType=VARCHAR}, #{mtel,jdbcType=VARCHAR}, #{mparenttel,jdbcType=VARCHAR}, 
+      #{mpicture,jdbcType=VARCHAR}, #{maddress,jdbcType=VARCHAR}, #{mdate,jdbcType=DATE}, 
+      #{mstate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Stumy" >
+    insert into stumy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mstuid != null" >
+        mstuid,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+      <if test="mpassword != null" >
+        mpassword,
+      </if>
+      <if test="msex != null" >
+        msex,
+      </if>
+      <if test="mage != null" >
+        mage,
+      </if>
+      <if test="mbuildnum != null" >
+        mbuildnum,
+      </if>
+      <if test="mdrom != null" >
+        mdrom,
+      </if>
+      <if test="mcollege != null" >
+        mcollege,
+      </if>
+      <if test="mmajor != null" >
+        mmajor,
+      </if>
+      <if test="mtel != null" >
+        mtel,
+      </if>
+      <if test="mparenttel != null" >
+        mparenttel,
+      </if>
+      <if test="mpicture != null" >
+        mpicture,
+      </if>
+      <if test="maddress != null" >
+        maddress,
+      </if>
+      <if test="mdate != null" >
+        mdate,
+      </if>
+      <if test="mstate != null" >
+        mstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mstuid != null" >
+        #{mstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mpassword != null" >
+        #{mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="msex != null" >
+        #{msex,jdbcType=VARCHAR},
+      </if>
+      <if test="mage != null" >
+        #{mage,jdbcType=DATE},
+      </if>
+      <if test="mbuildnum != null" >
+        #{mbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="mdrom != null" >
+        #{mdrom,jdbcType=VARCHAR},
+      </if>
+      <if test="mcollege != null" >
+        #{mcollege,jdbcType=VARCHAR},
+      </if>
+      <if test="mmajor != null" >
+        #{mmajor,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="mparenttel != null" >
+        #{mparenttel,jdbcType=VARCHAR},
+      </if>
+      <if test="mpicture != null" >
+        #{mpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="maddress != null" >
+        #{maddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mdate != null" >
+        #{mdate,jdbcType=DATE},
+      </if>
+      <if test="mstate != null" >
+        #{mstate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.StumyExample" resultType="java.lang.Integer" >
+    select count(*) from stumy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stumy
+    <set >
+      <if test="record.mid != null" >
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mstuid != null" >
+        mstuid = #{record.mstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mname != null" >
+        mname = #{record.mname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpassword != null" >
+        mpassword = #{record.mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msex != null" >
+        msex = #{record.msex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mage != null" >
+        mage = #{record.mage,jdbcType=DATE},
+      </if>
+      <if test="record.mbuildnum != null" >
+        mbuildnum = #{record.mbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mdrom != null" >
+        mdrom = #{record.mdrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcollege != null" >
+        mcollege = #{record.mcollege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mmajor != null" >
+        mmajor = #{record.mmajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtel != null" >
+        mtel = #{record.mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mparenttel != null" >
+        mparenttel = #{record.mparenttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpicture != null" >
+        mpicture = #{record.mpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maddress != null" >
+        maddress = #{record.maddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mdate != null" >
+        mdate = #{record.mdate,jdbcType=DATE},
+      </if>
+      <if test="record.mstate != null" >
+        mstate = #{record.mstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stumy
+    set mid = #{record.mid,jdbcType=INTEGER},
+      mstuid = #{record.mstuid,jdbcType=VARCHAR},
+      mname = #{record.mname,jdbcType=VARCHAR},
+      mpassword = #{record.mpassword,jdbcType=VARCHAR},
+      msex = #{record.msex,jdbcType=VARCHAR},
+      mage = #{record.mage,jdbcType=DATE},
+      mbuildnum = #{record.mbuildnum,jdbcType=VARCHAR},
+      mdrom = #{record.mdrom,jdbcType=VARCHAR},
+      mcollege = #{record.mcollege,jdbcType=VARCHAR},
+      mmajor = #{record.mmajor,jdbcType=VARCHAR},
+      mtel = #{record.mtel,jdbcType=VARCHAR},
+      mparenttel = #{record.mparenttel,jdbcType=VARCHAR},
+      mpicture = #{record.mpicture,jdbcType=VARCHAR},
+      maddress = #{record.maddress,jdbcType=VARCHAR},
+      mdate = #{record.mdate,jdbcType=DATE},
+      mstate = #{record.mstate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Stumy" >
+    update stumy
+    <set >
+      <if test="mstuid != null" >
+        mstuid = #{mstuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mpassword != null" >
+        mpassword = #{mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="msex != null" >
+        msex = #{msex,jdbcType=VARCHAR},
+      </if>
+      <if test="mage != null" >
+        mage = #{mage,jdbcType=DATE},
+      </if>
+      <if test="mbuildnum != null" >
+        mbuildnum = #{mbuildnum,jdbcType=VARCHAR},
+      </if>
+      <if test="mdrom != null" >
+        mdrom = #{mdrom,jdbcType=VARCHAR},
+      </if>
+      <if test="mcollege != null" >
+        mcollege = #{mcollege,jdbcType=VARCHAR},
+      </if>
+      <if test="mmajor != null" >
+        mmajor = #{mmajor,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        mtel = #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="mparenttel != null" >
+        mparenttel = #{mparenttel,jdbcType=VARCHAR},
+      </if>
+      <if test="mpicture != null" >
+        mpicture = #{mpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="maddress != null" >
+        maddress = #{maddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mdate != null" >
+        mdate = #{mdate,jdbcType=DATE},
+      </if>
+      <if test="mstate != null" >
+        mstate = #{mstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Stumy" >
+    update stumy
+    set mstuid = #{mstuid,jdbcType=VARCHAR},
+      mname = #{mname,jdbcType=VARCHAR},
+      mpassword = #{mpassword,jdbcType=VARCHAR},
+      msex = #{msex,jdbcType=VARCHAR},
+      mage = #{mage,jdbcType=DATE},
+      mbuildnum = #{mbuildnum,jdbcType=VARCHAR},
+      mdrom = #{mdrom,jdbcType=VARCHAR},
+      mcollege = #{mcollege,jdbcType=VARCHAR},
+      mmajor = #{mmajor,jdbcType=VARCHAR},
+      mtel = #{mtel,jdbcType=VARCHAR},
+      mparenttel = #{mparenttel,jdbcType=VARCHAR},
+      mpicture = #{mpicture,jdbcType=VARCHAR},
+      maddress = #{maddress,jdbcType=VARCHAR},
+      mdate = #{mdate,jdbcType=DATE},
+      mstate = #{mstate,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

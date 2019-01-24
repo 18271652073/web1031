@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.StuvisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Stuvisitor" >
+    <id column="vid" property="vid" jdbcType="INTEGER" />
+    <result column="vcdate" property="vcdate" jdbcType="DATE" />
+    <result column="vldate" property="vldate" jdbcType="DATE" />
+    <result column="vname" property="vname" jdbcType="VARCHAR" />
+    <result column="vdrom" property="vdrom" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vid, vcdate, vldate, vname, vdrom
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.StuvisitorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stuvisitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stuvisitor
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stuvisitor
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.StuvisitorExample" >
+    delete from stuvisitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Stuvisitor" >
+    insert into stuvisitor (vid, vcdate, vldate, 
+      vname, vdrom)
+    values (#{vid,jdbcType=INTEGER}, #{vcdate,jdbcType=DATE}, #{vldate,jdbcType=DATE}, 
+      #{vname,jdbcType=VARCHAR}, #{vdrom,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Stuvisitor" >
+    insert into stuvisitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="vcdate != null" >
+        vcdate,
+      </if>
+      <if test="vldate != null" >
+        vldate,
+      </if>
+      <if test="vname != null" >
+        vname,
+      </if>
+      <if test="vdrom != null" >
+        vdrom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="vcdate != null" >
+        #{vcdate,jdbcType=DATE},
+      </if>
+      <if test="vldate != null" >
+        #{vldate,jdbcType=DATE},
+      </if>
+      <if test="vname != null" >
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vdrom != null" >
+        #{vdrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.StuvisitorExample" resultType="java.lang.Integer" >
+    select count(*) from stuvisitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stuvisitor
+    <set >
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcdate != null" >
+        vcdate = #{record.vcdate,jdbcType=DATE},
+      </if>
+      <if test="record.vldate != null" >
+        vldate = #{record.vldate,jdbcType=DATE},
+      </if>
+      <if test="record.vname != null" >
+        vname = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vdrom != null" >
+        vdrom = #{record.vdrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stuvisitor
+    set vid = #{record.vid,jdbcType=INTEGER},
+      vcdate = #{record.vcdate,jdbcType=DATE},
+      vldate = #{record.vldate,jdbcType=DATE},
+      vname = #{record.vname,jdbcType=VARCHAR},
+      vdrom = #{record.vdrom,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Stuvisitor" >
+    update stuvisitor
+    <set >
+      <if test="vcdate != null" >
+        vcdate = #{vcdate,jdbcType=DATE},
+      </if>
+      <if test="vldate != null" >
+        vldate = #{vldate,jdbcType=DATE},
+      </if>
+      <if test="vname != null" >
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vdrom != null" >
+        vdrom = #{vdrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Stuvisitor" >
+    update stuvisitor
+    set vcdate = #{vcdate,jdbcType=DATE},
+      vldate = #{vldate,jdbcType=DATE},
+      vname = #{vname,jdbcType=VARCHAR},
+      vdrom = #{vdrom,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+</mapper>

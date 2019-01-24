@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.SturecordMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Sturecord" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="rdromnum" property="rdromnum" jdbcType="VARCHAR" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <result column="rnote" property="rnote" jdbcType="VARCHAR" />
+    <result column="rdate" property="rdate" jdbcType="DATE" />
+    <result column="rstate" property="rstate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, rdromnum, rname, rnote, rdate, rstate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.SturecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sturecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sturecord
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sturecord
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.SturecordExample" >
+    delete from sturecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Sturecord" >
+    insert into sturecord (rid, rdromnum, rname, 
+      rnote, rdate, rstate)
+    values (#{rid,jdbcType=INTEGER}, #{rdromnum,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, 
+      #{rnote,jdbcType=VARCHAR}, #{rdate,jdbcType=DATE}, #{rstate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Sturecord" >
+    insert into sturecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="rdromnum != null" >
+        rdromnum,
+      </if>
+      <if test="rname != null" >
+        rname,
+      </if>
+      <if test="rnote != null" >
+        rnote,
+      </if>
+      <if test="rdate != null" >
+        rdate,
+      </if>
+      <if test="rstate != null" >
+        rstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rdromnum != null" >
+        #{rdromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null" >
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rnote != null" >
+        #{rnote,jdbcType=VARCHAR},
+      </if>
+      <if test="rdate != null" >
+        #{rdate,jdbcType=DATE},
+      </if>
+      <if test="rstate != null" >
+        #{rstate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.SturecordExample" resultType="java.lang.Integer" >
+    select count(*) from sturecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sturecord
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rdromnum != null" >
+        rdromnum = #{record.rdromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rname != null" >
+        rname = #{record.rname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rnote != null" >
+        rnote = #{record.rnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rdate != null" >
+        rdate = #{record.rdate,jdbcType=DATE},
+      </if>
+      <if test="record.rstate != null" >
+        rstate = #{record.rstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sturecord
+    set rid = #{record.rid,jdbcType=INTEGER},
+      rdromnum = #{record.rdromnum,jdbcType=VARCHAR},
+      rname = #{record.rname,jdbcType=VARCHAR},
+      rnote = #{record.rnote,jdbcType=VARCHAR},
+      rdate = #{record.rdate,jdbcType=DATE},
+      rstate = #{record.rstate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Sturecord" >
+    update sturecord
+    <set >
+      <if test="rdromnum != null" >
+        rdromnum = #{rdromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null" >
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rnote != null" >
+        rnote = #{rnote,jdbcType=VARCHAR},
+      </if>
+      <if test="rdate != null" >
+        rdate = #{rdate,jdbcType=DATE},
+      </if>
+      <if test="rstate != null" >
+        rstate = #{rstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Sturecord" >
+    update sturecord
+    set rdromnum = #{rdromnum,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR},
+      rnote = #{rnote,jdbcType=VARCHAR},
+      rdate = #{rdate,jdbcType=DATE},
+      rstate = #{rstate,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.BbstopicMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Bbstopic" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="tsid" property="tsid" jdbcType="INTEGER" />
+    <result column="tuid" property="tuid" jdbcType="INTEGER" />
+    <result column="ttitle" property="ttitle" jdbcType="VARCHAR" />
+    <result column="tcontent" property="tcontent" jdbcType="VARCHAR" />
+    <result column="tflag" property="tflag" jdbcType="VARCHAR" />
+    <result column="tclickcount" property="tclickcount" jdbcType="INTEGER" />
+    <result column="tfdate" property="tfdate" jdbcType="DATE" />
+    <result column="tldate" property="tldate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tid, tsid, tuid, ttitle, tcontent, tflag, tclickcount, tfdate, tldate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.BbstopicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bbstopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bbstopic
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bbstopic
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.BbstopicExample" >
+    delete from bbstopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Bbstopic" >
+    insert into bbstopic (tid, tsid, tuid, 
+      ttitle, tcontent, tflag, 
+      tclickcount, tfdate, tldate
+      )
+    values (#{tid,jdbcType=INTEGER}, #{tsid,jdbcType=INTEGER}, #{tuid,jdbcType=INTEGER}, 
+      #{ttitle,jdbcType=VARCHAR}, #{tcontent,jdbcType=VARCHAR}, #{tflag,jdbcType=VARCHAR}, 
+      #{tclickcount,jdbcType=INTEGER}, #{tfdate,jdbcType=DATE}, #{tldate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Bbstopic" >
+    insert into bbstopic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="tsid != null" >
+        tsid,
+      </if>
+      <if test="tuid != null" >
+        tuid,
+      </if>
+      <if test="ttitle != null" >
+        ttitle,
+      </if>
+      <if test="tcontent != null" >
+        tcontent,
+      </if>
+      <if test="tflag != null" >
+        tflag,
+      </if>
+      <if test="tclickcount != null" >
+        tclickcount,
+      </if>
+      <if test="tfdate != null" >
+        tfdate,
+      </if>
+      <if test="tldate != null" >
+        tldate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="tsid != null" >
+        #{tsid,jdbcType=INTEGER},
+      </if>
+      <if test="tuid != null" >
+        #{tuid,jdbcType=INTEGER},
+      </if>
+      <if test="ttitle != null" >
+        #{ttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tcontent != null" >
+        #{tcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="tflag != null" >
+        #{tflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tclickcount != null" >
+        #{tclickcount,jdbcType=INTEGER},
+      </if>
+      <if test="tfdate != null" >
+        #{tfdate,jdbcType=DATE},
+      </if>
+      <if test="tldate != null" >
+        #{tldate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.BbstopicExample" resultType="java.lang.Integer" >
+    select count(*) from bbstopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bbstopic
+    <set >
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsid != null" >
+        tsid = #{record.tsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tuid != null" >
+        tuid = #{record.tuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttitle != null" >
+        ttitle = #{record.ttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcontent != null" >
+        tcontent = #{record.tcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tflag != null" >
+        tflag = #{record.tflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tclickcount != null" >
+        tclickcount = #{record.tclickcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tfdate != null" >
+        tfdate = #{record.tfdate,jdbcType=DATE},
+      </if>
+      <if test="record.tldate != null" >
+        tldate = #{record.tldate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bbstopic
+    set tid = #{record.tid,jdbcType=INTEGER},
+      tsid = #{record.tsid,jdbcType=INTEGER},
+      tuid = #{record.tuid,jdbcType=INTEGER},
+      ttitle = #{record.ttitle,jdbcType=VARCHAR},
+      tcontent = #{record.tcontent,jdbcType=VARCHAR},
+      tflag = #{record.tflag,jdbcType=VARCHAR},
+      tclickcount = #{record.tclickcount,jdbcType=INTEGER},
+      tfdate = #{record.tfdate,jdbcType=DATE},
+      tldate = #{record.tldate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Bbstopic" >
+    update bbstopic
+    <set >
+      <if test="tsid != null" >
+        tsid = #{tsid,jdbcType=INTEGER},
+      </if>
+      <if test="tuid != null" >
+        tuid = #{tuid,jdbcType=INTEGER},
+      </if>
+      <if test="ttitle != null" >
+        ttitle = #{ttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tcontent != null" >
+        tcontent = #{tcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="tflag != null" >
+        tflag = #{tflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tclickcount != null" >
+        tclickcount = #{tclickcount,jdbcType=INTEGER},
+      </if>
+      <if test="tfdate != null" >
+        tfdate = #{tfdate,jdbcType=DATE},
+      </if>
+      <if test="tldate != null" >
+        tldate = #{tldate,jdbcType=DATE},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Bbstopic" >
+    update bbstopic
+    set tsid = #{tsid,jdbcType=INTEGER},
+      tuid = #{tuid,jdbcType=INTEGER},
+      ttitle = #{ttitle,jdbcType=VARCHAR},
+      tcontent = #{tcontent,jdbcType=VARCHAR},
+      tflag = #{tflag,jdbcType=VARCHAR},
+      tclickcount = #{tclickcount,jdbcType=INTEGER},
+      tfdate = #{tfdate,jdbcType=DATE},
+      tldate = #{tldate,jdbcType=DATE}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

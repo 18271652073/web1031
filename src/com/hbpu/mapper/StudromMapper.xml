@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.StudromMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Studrom" >
+    <id column="drid" property="drid" jdbcType="INTEGER" />
+    <result column="drbuildid" property="drbuildid" jdbcType="VARCHAR" />
+    <result column="drdromid" property="drdromid" jdbcType="VARCHAR" />
+    <result column="drnum" property="drnum" jdbcType="INTEGER" />
+    <result column="drcount" property="drcount" jdbcType="INTEGER" />
+    <result column="drtel" property="drtel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    drid, drbuildid, drdromid, drnum, drcount, drtel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.StudromExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from studrom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from studrom
+    where drid = #{drid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from studrom
+    where drid = #{drid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.StudromExample" >
+    delete from studrom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Studrom" >
+    insert into studrom (drid, drbuildid, drdromid, 
+      drnum, drcount, drtel
+      )
+    values (#{drid,jdbcType=INTEGER}, #{drbuildid,jdbcType=VARCHAR}, #{drdromid,jdbcType=VARCHAR}, 
+      #{drnum,jdbcType=INTEGER}, #{drcount,jdbcType=INTEGER}, #{drtel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Studrom" >
+    insert into studrom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drid != null" >
+        drid,
+      </if>
+      <if test="drbuildid != null" >
+        drbuildid,
+      </if>
+      <if test="drdromid != null" >
+        drdromid,
+      </if>
+      <if test="drnum != null" >
+        drnum,
+      </if>
+      <if test="drcount != null" >
+        drcount,
+      </if>
+      <if test="drtel != null" >
+        drtel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drid != null" >
+        #{drid,jdbcType=INTEGER},
+      </if>
+      <if test="drbuildid != null" >
+        #{drbuildid,jdbcType=VARCHAR},
+      </if>
+      <if test="drdromid != null" >
+        #{drdromid,jdbcType=VARCHAR},
+      </if>
+      <if test="drnum != null" >
+        #{drnum,jdbcType=INTEGER},
+      </if>
+      <if test="drcount != null" >
+        #{drcount,jdbcType=INTEGER},
+      </if>
+      <if test="drtel != null" >
+        #{drtel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.StudromExample" resultType="java.lang.Integer" >
+    select count(*) from studrom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update studrom
+    <set >
+      <if test="record.drid != null" >
+        drid = #{record.drid,jdbcType=INTEGER},
+      </if>
+      <if test="record.drbuildid != null" >
+        drbuildid = #{record.drbuildid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drdromid != null" >
+        drdromid = #{record.drdromid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drnum != null" >
+        drnum = #{record.drnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.drcount != null" >
+        drcount = #{record.drcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.drtel != null" >
+        drtel = #{record.drtel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update studrom
+    set drid = #{record.drid,jdbcType=INTEGER},
+      drbuildid = #{record.drbuildid,jdbcType=VARCHAR},
+      drdromid = #{record.drdromid,jdbcType=VARCHAR},
+      drnum = #{record.drnum,jdbcType=INTEGER},
+      drcount = #{record.drcount,jdbcType=INTEGER},
+      drtel = #{record.drtel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Studrom" >
+    update studrom
+    <set >
+      <if test="drbuildid != null" >
+        drbuildid = #{drbuildid,jdbcType=VARCHAR},
+      </if>
+      <if test="drdromid != null" >
+        drdromid = #{drdromid,jdbcType=VARCHAR},
+      </if>
+      <if test="drnum != null" >
+        drnum = #{drnum,jdbcType=INTEGER},
+      </if>
+      <if test="drcount != null" >
+        drcount = #{drcount,jdbcType=INTEGER},
+      </if>
+      <if test="drtel != null" >
+        drtel = #{drtel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where drid = #{drid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Studrom" >
+    update studrom
+    set drbuildid = #{drbuildid,jdbcType=VARCHAR},
+      drdromid = #{drdromid,jdbcType=VARCHAR},
+      drnum = #{drnum,jdbcType=INTEGER},
+      drcount = #{drcount,jdbcType=INTEGER},
+      drtel = #{drtel,jdbcType=VARCHAR}
+    where drid = #{drid,jdbcType=INTEGER}
+  </update>
+</mapper>

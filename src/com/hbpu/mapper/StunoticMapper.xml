@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hbpu.mapper.StunoticMapper" >
+  <resultMap id="BaseResultMap" type="com.hbpu.po.Stunotic" >
+    <id column="nid" property="nid" jdbcType="INTEGER" />
+    <result column="ndromnum" property="ndromnum" jdbcType="VARCHAR" />
+    <result column="nwater" property="nwater" jdbcType="INTEGER" />
+    <result column="nelectric" property="nelectric" jdbcType="INTEGER" />
+    <result column="ndate" property="ndate" jdbcType="DATE" />
+    <result column="nstate" property="nstate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    nid, ndromnum, nwater, nelectric, ndate, nstate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hbpu.po.StunoticExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stunotic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stunotic
+    where nid = #{nid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stunotic
+    where nid = #{nid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbpu.po.StunoticExample" >
+    delete from stunotic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbpu.po.Stunotic" >
+    insert into stunotic (nid, ndromnum, nwater, 
+      nelectric, ndate, nstate
+      )
+    values (#{nid,jdbcType=INTEGER}, #{ndromnum,jdbcType=VARCHAR}, #{nwater,jdbcType=INTEGER}, 
+      #{nelectric,jdbcType=INTEGER}, #{ndate,jdbcType=DATE}, #{nstate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbpu.po.Stunotic" >
+    insert into stunotic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nid != null" >
+        nid,
+      </if>
+      <if test="ndromnum != null" >
+        ndromnum,
+      </if>
+      <if test="nwater != null" >
+        nwater,
+      </if>
+      <if test="nelectric != null" >
+        nelectric,
+      </if>
+      <if test="ndate != null" >
+        ndate,
+      </if>
+      <if test="nstate != null" >
+        nstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nid != null" >
+        #{nid,jdbcType=INTEGER},
+      </if>
+      <if test="ndromnum != null" >
+        #{ndromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="nwater != null" >
+        #{nwater,jdbcType=INTEGER},
+      </if>
+      <if test="nelectric != null" >
+        #{nelectric,jdbcType=INTEGER},
+      </if>
+      <if test="ndate != null" >
+        #{ndate,jdbcType=DATE},
+      </if>
+      <if test="nstate != null" >
+        #{nstate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbpu.po.StunoticExample" resultType="java.lang.Integer" >
+    select count(*) from stunotic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stunotic
+    <set >
+      <if test="record.nid != null" >
+        nid = #{record.nid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ndromnum != null" >
+        ndromnum = #{record.ndromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nwater != null" >
+        nwater = #{record.nwater,jdbcType=INTEGER},
+      </if>
+      <if test="record.nelectric != null" >
+        nelectric = #{record.nelectric,jdbcType=INTEGER},
+      </if>
+      <if test="record.ndate != null" >
+        ndate = #{record.ndate,jdbcType=DATE},
+      </if>
+      <if test="record.nstate != null" >
+        nstate = #{record.nstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stunotic
+    set nid = #{record.nid,jdbcType=INTEGER},
+      ndromnum = #{record.ndromnum,jdbcType=VARCHAR},
+      nwater = #{record.nwater,jdbcType=INTEGER},
+      nelectric = #{record.nelectric,jdbcType=INTEGER},
+      ndate = #{record.ndate,jdbcType=DATE},
+      nstate = #{record.nstate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbpu.po.Stunotic" >
+    update stunotic
+    <set >
+      <if test="ndromnum != null" >
+        ndromnum = #{ndromnum,jdbcType=VARCHAR},
+      </if>
+      <if test="nwater != null" >
+        nwater = #{nwater,jdbcType=INTEGER},
+      </if>
+      <if test="nelectric != null" >
+        nelectric = #{nelectric,jdbcType=INTEGER},
+      </if>
+      <if test="ndate != null" >
+        ndate = #{ndate,jdbcType=DATE},
+      </if>
+      <if test="nstate != null" >
+        nstate = #{nstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbpu.po.Stunotic" >
+    update stunotic
+    set ndromnum = #{ndromnum,jdbcType=VARCHAR},
+      nwater = #{nwater,jdbcType=INTEGER},
+      nelectric = #{nelectric,jdbcType=INTEGER},
+      ndate = #{ndate,jdbcType=DATE},
+      nstate = #{nstate,jdbcType=VARCHAR}
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+</mapper>
